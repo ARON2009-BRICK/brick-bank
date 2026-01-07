@@ -3,170 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Кирпич Банк</title>
+<title>Brick Bank</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
     --bg-dark: #0a0a14;
-    --neon-green: #00ff9d;
-    --neon-purple: #9d4edd;
-    --neon-pink: #ff006e;
-    --neon-blue: #00d9ff;
     --neon-orange: #ff6b00;
+    --neon-green: #00ff9d;
     --text-light: #e0e0e0;
     --card-bg: #151522;
+    --glow-orange: 0 0 15px rgba(255,107,0,0.7);
 }
 
-/* Общие стили */
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif;}
+
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-light);
 }
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
 
-/* Заголовок */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-    background-color: var(--card-bg);
-}
-.logo-text {
-    font-size: 28px;
-    font-weight: 800;
-    background: linear-gradient(to right, var(--neon-orange), var(--neon-green));
-    -webkit-background-clip: text;
-    color: transparent;
-}
-.nav-links a {
-    margin-left: 15px;
-    text-decoration: none;
-    color: var(--text-light);
-}
-.nav-links a:hover { color: var(--neon-orange); }
-.auth-btn {
-    background: linear-gradient(45deg, var(--neon-orange), var(--neon-green));
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    cursor: pointer;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:15px 20px; background-color: var(--card-bg); border-bottom:2px solid var(--neon-orange);
 }
 
-/* Основной контент */
-.main-layout {
-    display: flex;
-    gap: 30px;
-    margin-top: 30px;
-}
-.sidebar {
-    width: 250px;
-    background-color: var(--card-bg);
-    border-radius: 15px;
-    padding: 20px;
-}
-.nav-item {
-    display: block;
-    padding: 12px;
-    border-radius: 10px;
-    color: var(--text-light);
-    margin-bottom: 8px;
-    cursor: pointer;
-}
-.nav-item:hover { background-color: rgba(255,107,0,0.1); }
-
-/* Основной контент справа */
-.main-content {
-    flex: 1;
+header .logo {
+    font-size:24px; font-weight:bold; color: var(--neon-orange);
 }
 
-/* Баланс */
-.balance-item {
-    background-color: var(--card-bg);
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-.balance-amount.rub { color: var(--neon-orange); }
-.balance-amount.crypto { color: var(--neon-purple); }
+.nav-btn {background: var(--neon-orange); border:none; padding:8px 15px; border-radius:10px; color:white; cursor:pointer;}
 
-/* Карточки */
-.virtual-card {
-    background: linear-gradient(45deg, #1a1a2e, #16213e);
-    border-radius: 20px;
-    padding: 20px;
-    margin-bottom: 20px;
-    color: white;
+.container {padding:20px;}
+
+.card {
+    background-color: var(--card-bg); padding:20px; border-radius:15px;
+    margin-bottom:20px; box-shadow: var(--glow-orange); transition:0.3s;
 }
 
-/* Кнопки */
-.btn-primary {
-    background: linear-gradient(45deg, var(--neon-orange), var(--neon-green));
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 30px;
-    cursor: pointer;
-}
-.btn-primary:hover { opacity: 0.9; }
+.card:hover {transform: translateY(-5px);}
 
-/* Модалки */
+.btn {background: var(--neon-orange); color:white; border:none; padding:10px 15px; border-radius:10px; cursor:pointer; margin-top:10px;}
+
 .modal {
-    display: none;
-    position: fixed;
-    top:0; left:0; width:100%; height:100%;
-    background: rgba(0,0,0,0.8);
-    justify-content: center;
-    align-items: center;
+    display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.8); justify-content:center; align-items:center;
 }
+
 .modal-content {
-    background-color: var(--card-bg);
-    padding: 30px;
-    border-radius: 15px;
+    background: var(--card-bg); padding:20px; border-radius:15px; max-width:400px; width:90%;
+    position:relative;
+}
+
+.close-modal {
+    position:absolute; top:10px; right:10px; background:none; border:none; font-size:20px; color: var(--neon-orange); cursor:pointer;
 }
 </style>
 </head>
 <body>
-<header class="container">
-    <div class="logo-text">Кирпич Банк</div>
-    <div class="nav-links">
-        <a href="#">Главная</a>
-        <a href="#">Баланс</a>
-        <a href="#">Карты</a>
-    </div>
-    <button class="auth-btn">Войти</button>
+
+<header>
+    <div class="logo">Brick Bank</div>
+    <button class="nav-btn" id="open-add-card">Добавить карту</button>
 </header>
 
-<div class="container main-layout">
-    <div class="sidebar">
-        <div class="nav-item active"><i class="fa fa-home"></i> Главная</div>
-        <div class="nav-item"><i class="fa fa-wallet"></i> Баланс</div>
-        <div class="nav-item"><i class="fa fa-credit-card"></i> Карты</div>
+<div class="container">
+    <div class="card">
+        <h2>Баланс</h2>
+        <p id="balance">₽ 0</p>
+        <button class="btn" id="add-money-btn">Пополнить</button>
     </div>
-    <div class="main-content">
-        <div class="balance-item">
-            <div>Баланс Рублей</div>
-            <div class="balance-amount rub">1000 ₽</div>
-        </div>
-        <div class="balance-item">
-            <div>Баланс Crypto</div>
-            <div class="balance-amount crypto">0.5 BTC</div>
-        </div>
 
-        <div class="virtual-card">
-            <div>Виртуальная карта</div>
-            <div>**** **** **** 1234</div>
+    <div class="card">
+        <h2>Карты</h2>
+        <div id="cards-container">
+            <!-- Карты появятся здесь -->
         </div>
-        <button class="btn-primary">Добавить карту</button>
     </div>
 </div>
+
+<!-- Модалка -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <button class="close-modal" id="close-modal">&times;</button>
+        <h3>Добавить карту</h3>
+        <input type="text" id="card-number" placeholder="Номер карты">
+        <button class="btn" id="save-card">Сохранить карту</button>
+    </div>
+</div>
+
+<script>
+// Элементы
+const modal = document.getElementById('modal');
+const openAddCardBtn = document.getElementById('open-add-card');
+const closeModalBtn = document.getElementById('close-modal');
+const saveCardBtn = document.getElementById('save-card');
+const cardsContainer = document.getElementById('cards-container');
+const addMoneyBtn = document.getElementById('add-money-btn');
+const balanceEl = document.getElementById('balance');
+
+let balance = 0;
+
+// Открытие модалки
+openAddCardBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+});
+
+// Закрытие модалки
+closeModalBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+// Сохранение карты
+saveCardBtn.addEventListener('click', () => {
+    const cardNumber = document.getElementById('card-number').value;
+    if(cardNumber.trim() === '') return alert('Введите номер карты!');
+    
+    const cardEl = document.createElement('div');
+    cardEl.classList.add('card');
+    cardEl.textContent = 'Карта: ' + cardNumber;
+    cardsContainer.appendChild(cardEl);
+    
+    document.getElementById('card-number').value = '';
+    modal.style.display = 'none';
+});
+
+// Пополнение баланса
+addMoneyBtn.addEventListener('click', () => {
+    const amount = prompt('Сколько добавить?');
+    if(!amount || isNaN(amount)) return;
+    balance += Number(amount);
+    balanceEl.textContent = '₽ ' + balance;
+});
+
+// Закрытие модалки при клике вне контента
+window.addEventListener('click', (e) => {
+    if(e.target === modal) modal.style.display = 'none';
+});
+</script>
+
 </body>
 </html>
