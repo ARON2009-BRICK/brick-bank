@@ -1,129 +1,69 @@
-/* =========================
-   MOBILE (до 768px)
-========================= */
-@media (max-width: 768px) {
-
-    /* Общие отступы */
-    .container {
-        padding: 0 12px;
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brick Bank</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0a0a14;
+      font-family: Arial, sans-serif;
+      color: #fff;
     }
 
-    /* Header */
-    .header-content {
-        flex-direction: column;
-        gap: 15px;
+    header {
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #ff6b00, #00ff9d);
+      color: #000;
     }
 
-    .logo-text {
-        font-size: 22px;
+    .card {
+      margin: 20px;
+      padding: 20px;
+      background: #151522;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255,107,0,.4);
     }
 
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
+    .balance {
+      font-size: 32px;
+      color: #00ff9d;
+      margin-top: 10px;
     }
 
-    .auth-btn {
-        width: 100%;
-        max-width: 280px;
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      background: linear-gradient(90deg, #ff6b00, #00ff9d);
+      cursor: pointer;
     }
+  </style>
+</head>
+<body>
 
-    /* Основной layout */
-    .main-layout {
-        flex-direction: column;
-        gap: 20px;
-    }
+<header>🏦 Brick Bank</header>
 
-    /* Sidebar -> сверху */
-    .sidebar {
-        width: 100%;
-        position: relative;
-        top: 0;
-        height: auto;
-    }
+<div class="card">
+  <h2>Баланс</h2>
+  <div class="balance" id="balance">0 ₽</div>
+  <button onclick="addMoney()">+100 ₽</button>
+</div>
 
-    .sidebar-nav {
-        display: flex;
-        overflow-x: auto;
-        gap: 10px;
-    }
+<script>
+  let balance = 0;
+  function addMoney() {
+    balance += 100;
+    document.getElementById('balance').innerText = balance + ' ₽';
+  }
+</script>
 
-    .nav-item {
-        white-space: nowrap;
-        margin-bottom: 0;
-        padding: 10px 14px;
-        font-size: 14px;
-    }
-
-    /* Hero */
-    .hero h1 {
-        font-size: 24px;
-    }
-
-    .hero p {
-        font-size: 15px;
-    }
-
-    /* Баланс */
-    .balance-amount {
-        font-size: 22px;
-    }
-
-    /* Карты */
-    .cards-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .virtual-card {
-        height: auto;
-        padding-bottom: 25px;
-    }
-
-    .card-number {
-        font-size: 16px;
-    }
-
-    /* Профиль */
-    .profile-header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .profile-avatar {
-        width: 80px;
-        height: 80px;
-    }
-
-    .avatar-mask {
-        width: 70px;
-        height: 70px;
-        font-size: 30px;
-    }
-
-    /* Таблицы → скролл */
-    .transfers-history {
-        overflow-x: auto;
-    }
-
-    .history-table {
-        min-width: 600px;
-    }
-
-    /* Кликер */
-    .clicker-btn {
-        width: 120px;
-        height: 120px;
-        font-size: 18px;
-    }
-
-    .clicker-counter {
-        font-size: 36px;
-    }
-
-    /* Кнопки */
-    .btn {
-        width: 100%;
-    }
-}
-
+</body>
+</html>
