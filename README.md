@@ -152,3 +152,35 @@ function reset() {
 
 </body>
 </html>
+/* Для телефонов */
+@media (max-width: 768px) {
+    .main-layout {
+        flex-direction: column; /* Боковая панель вниз */
+        gap: 20px;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr; /* Карточки в одну колонку */
+    }
+
+    .balance-display {
+        grid-template-columns: 1fr; /* Баланс тоже в одну колонку */
+    }
+
+    header .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
